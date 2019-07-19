@@ -1,8 +1,13 @@
 import controller from './controller'
+import {
+    isAdmin
+} from '../auth'
 
 export default (app) => {
     app.get('/items', controller.getAll)
     app.get('/item/:id', controller.get)
-    app.post('/items', controller.add)
-    app.patch('/items/:id', controller.modifyQuantity)
+    // admin utility.
+    app.post('/items', isAdmin, controller.add)
+    app.patch('/items/:id', isAdmin, controller.modifyQuantity)
+    app.delete('/item/:id', isAdmin, controller.delete)
 }

@@ -34,11 +34,21 @@ export default class ItemController {
     }
 
     static add(req, res) {
-
+        return res.status(200).send({
+            success: true
+        })
     }
 
     static modifyQuantity(req, res) {
+        return res.status(200).send({
+            success: true
+        })
+    }
 
+    static delete(req, res) {
+        return res.status(200).send({
+            success: true
+        })
     }
 
 
