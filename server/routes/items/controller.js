@@ -2,12 +2,11 @@
 import Validator from './validation'
 
 import models from '../../models'
-// TODO: Is this the correct way to place this?
+
 let itemNotFoundMessage = {
     success: false,
     message: "Item could not be found"
 }
-
 let itemModel = models.items
 
 export default class ItemController {
@@ -23,11 +22,11 @@ export default class ItemController {
     static get(req, res) {
         const id = parseInt(req.params.id)
 
-        itemModel.findByPk(id).then(todo => {
-            if (todo) {
+        itemModel.findByPk(id).then(item => {
+            if (item) {
                 return res.status(200).send({
                     success: true,
-                    todo
+                    item
                 })
             }
 

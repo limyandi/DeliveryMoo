@@ -4,18 +4,19 @@
     "description": "",
     "main": "app.js",
     "engines": {
-        "node": "12.4.0",
+        "node": "^10",
         "npm": "6.9.0"
     },
     "dependencies": {
+        "braces": "^2.3.2",
         "dotenv": "^8.0.0",
         "express": "^4.17.1",
-        "helmet": "^3.19.0",
+        "helmet": "^3.20.0",
         "joi": "^14.3.1",
         "nodemon": "^1.19.1",
         "pg": "^7.11.0",
         "pg-hstore": "^2.3.3",
-        "sequelize": "^5.10.1",
+        "sequelize": "^5.10.2",
         "sequelize-cli": "^5.5.0"
     },
     "devDependencies": {
@@ -29,8 +30,10 @@
     },
     "scripts": {
         "test": "mocha --require babel-register tests/*.js --exit",
-        "start": "nodemon --exec babel-node --presets es2015 app.js",
-        "build": "babel --presets es2015 -d lib/ src"
+        "clean": "rm -rf build && mkdir build",
+        "build-server": "babel -d ./build ./server -s",
+        "build": "npm run clean && npm run build-server",
+        "start": "node ./build/app.js"
     },
     "author": "",
     "license": "ISC"
