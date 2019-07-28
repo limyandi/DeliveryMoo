@@ -36,12 +36,17 @@ export default class ItemController {
 
     static add(req, res) {
         const items = req.body.items
-        Validator.validateAdd(items).then(() => {
-            // TODO: FIX WITH PROMISE / ASYNC AWAIT
-            let promises = items.map(item => {
-                itemModel.create(item).then((createdItem) => {
-                    return createdItem.id
+        Validator.validateAdd(items).then(async () => {
+            let itemIds = []
+            for (let item of items) {
+                await itemModel.create(item).then((createdItem) => {
+                    itemIds.push(createdItem.id)
                 })
+            }
+
+            res.status(200).send({
+                success: true,
+                itemIds
             })
 
         }).catch(() => {

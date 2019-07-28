@@ -50,15 +50,22 @@ export default class OrderController {
         itemModel.findByPk(itemId).then(item => {
             if (item) {
                 if (item.stock >= quantity) {
+                    let itemStock = parseInt(item.stock)
+
                     // TODO: Reduce Item Stock?
                     const order = {
                         itemId,
                         quantity
                     }
+
                     orderModel.create(order).then((order) => {
-                        res.status(201).send({
-                            success: true,
-                            order
+                        item.update({
+                            stock: itemStock - quantity
+                        }).then(() => {
+                            res.status(201).send({
+                                success: true,
+                                order
+                            })
                         })
                     })
                 } else {

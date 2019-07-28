@@ -1,4 +1,6 @@
-{
+require('dotenv').config()
+
+module.exports = {
     "development": {
         "use_env_variable": "DATABASE_URL"
     },
@@ -11,10 +13,10 @@
         "operatorsAliases": false
     },
     "production": {
-        "username": "admin",
-        "password": "admin",
-        "database": "deliverymoo",
-        "host": "/cloudsql/deliverymoo-247811:australia-southeast1:deliverymoo",
+        "username": null,
+        "password": null,
+        "database": process.env.DB_DATABASE,
+        "host": process.env.DB_HOST,
         "dialect": "postgres",
         "operatorsAliases": false
     }
